@@ -19,12 +19,12 @@ But this is where modern server frameworks leave off. Rel is designed to be a sc
 Building and launching a serice is about as easy as it gets:
 
 ```
-import RelServer, { RelSchema } from "@rel/server"
+import Server, { Schema } from "@rel/server"
 
 const schema = {
   Person: {
     fields: {
-      name: RelSchema.string().required(),
+      name: Schema.string().required(),
     },
     accessors: {
       find: {
@@ -35,8 +35,8 @@ const schema = {
   },
   Movie: {
     fields: {
-      title: RelSchema.string().required(),
-      tagline: RelSchema.string(),
+      title: Schema.string().required(),
+      tagline: Schema.string(),
     },
     accessors: {
       find: true,
@@ -45,7 +45,7 @@ const schema = {
   },
 }
 
-RelServer.start({
+Server.start({
   schema,
 })
 
