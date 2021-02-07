@@ -6,7 +6,9 @@ Rel is a semi-opinionated, [cypher-based](http://www.opencypher.org/) graph data
 
 I'm not sure the last time you got to work in the frontend world of JS but the framework ecosystem is highly robust. 
 
-Why is it that backend frameworks stop at the metal/middleware layer? 
+Why is it that backend frameworks stop at the metal/middleware layer?  
+
+Enter Rel: The domain-first, NoSQL + relational framework.
 
 ## Domain first approach
 
