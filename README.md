@@ -16,6 +16,43 @@ Building backend services requires a good head when it comes to domain modeling.
 
 But this is where modern server frameworks leave off. Rel is designed to be a schema-first approach to backend services. 
 
+Building and launching a serice is about as easy as it gets:
+
+```
+import RelServer, { RelSchema } from "@rel/server"
+
+const schema = {
+  Person: {
+    fields: {
+      name: RelSchema.string().required(),
+    },
+    accessors: {
+      find: {
+        findBy: ["name"],
+      },
+      list: true,
+    },
+  },
+  Movie: {
+    fields: {
+      title: RelSchema.string().required(),
+      tagline: RelSchema.string(),
+    },
+    accessors: {
+      find: true,
+      list: true,
+    },
+  },
+}
+
+RelServer.start({
+  schema,
+})
+
+const PORT = process.env.PORT || 4000
+console.log(`Rel server running on localhost:${PORT}`)
+```
+
 ## Why not use a Headless CMS?
 
 There are some great options out there but most fall down when it comes to relational data. 
