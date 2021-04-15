@@ -22,7 +22,7 @@ This will run your though a few questions about your project and generate a runn
 
 Once finished, you will have the following project structure:
 
-```
+```bash
 ./myapp
 │
 ├── api
@@ -38,7 +38,7 @@ Once finished, you will have the following project structure:
 
 Add new models in ./models
 
-```
+```typescript
 // ./models/Book.ts
 
 import Rel from "@reldb/run"
@@ -52,7 +52,7 @@ export default Rel.model({
 
 Add endpoints in ./api
 
-```
+```typescript
 // ./api/hello.ts
 
 import Rel from "@reldb/run"
@@ -65,13 +65,13 @@ export default Rel.query("Hello", {}, Rel.string())
 
 Then run your project:
 
-```
+```bash
 rel dev
 ```
 
 This will run a GraphQL server with the following schema:
 
-```
+```graphql
 type Book {
   id: UUID!
   createdAt: DateTime!
