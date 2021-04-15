@@ -25,8 +25,8 @@ Once finished, you will have the following project structure:
 ```
 ./myapp
 │
-├── schema
-│   └── ...
+├── models
+│   └── ... Book.ts, Movie.ts, etc
 ├── server.ts
 ├── package.json
 ├── relconfig.json
