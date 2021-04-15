@@ -70,6 +70,25 @@ rel dev
 This will run a GraphQL server with the following schema:
 
 ```
+type Book {
+  id: UUID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  slug: String!
+}
+
+input BookWhere {
+  name: String
+  slug: String
+}
+
+
+input BookInput {
+  name: String!
+  slug: String
+}
+
 type Query {
   FindBook(where: BookWhere): Book
   ListBooks(where: BookWhere): [Book]!
