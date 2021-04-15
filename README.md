@@ -1,73 +1,79 @@
-# Rel DB
+# rel - The backend for frontend developers
 
-Rel is a semi-opinionated, [cypher-based](http://www.opencypher.org/) graph database as a service, with automatic [GraphQL](https://graphql.org/) generation and type definitions.
+There has been quite the renaissance in the Javascript world over the past 10 years. New frontend tooling is pushing the boundaries of both native and web applications.
 
-## Introduction - Why are we here?
+Our goal is to apply some of the foundations that have made frontend tooling successful to the backend. We want to have you up and running in minutes
 
-I'm not sure the last time you got to work in the frontend world of JS but the framework ecosystem is highly robust. 
+# Documentation
 
-Why is it that backend frameworks stop at the metal/middleware layer?  
+Visit [https://rel.run](https://rel.run) to view the full documentation.
 
-Enter Rel: The domain-first, NoSQL + relational framework.
+# Quickstart
 
-## Domain first approach
+Run `npx create-rel-app` to initialize a new project.
 
-Building backend services requires a good head when it comes to domain modeling. Understanding how data relates is the first step in designing a robust system.
+This will run your though a few questions about your project and generate a runnable server.
 
-But this is where modern server frameworks leave off. Rel is designed to be a schema-first approach to backend services. 
-
-Building and launching a serice is about as easy as it gets:
+Once finished, you will have the following project structure:
 
 ```
-import Server, { Schema } from "@rel/server"
+./myapp
+│
+├── schema
+│   └── ...
+├── server.ts
+├── package.json
+├── relconfig.json
+├── tsconfig.json
+└── Dockerfile
+```
 
-const schema = {
-  Person: {
-    fields: {
-      name: Schema.string().required(),
-    },
-    accessors: {
-      find: {
-        findBy: ["name"],
-      },
-      list: true,
-    },
-  },
-  Movie: {
-    fields: {
-      title: Schema.string().required(),
-      tagline: Schema.string(),
-    },
-    accessors: {
-      find: true,
-      list: true,
-    },
-  },
+Add new models in ./models
+
+```
+// ./models/Book.ts
+
+import Rel from "@reldb/run"
+
+export default Rel.model({
+  name: Rel.string().required(),
+  slug: Rel.slug({ from: "name" })
+  // ... add other fields
+})
+```
+
+Add endpoints in ./api
+
+```
+// ./api/hello.ts
+
+import Rel from "@reldb/run"
+
+export default Rel.query("Hello", {}, Rel.string())
+  .resolver(() => {
+    return "Hello, World!"
+  })
+```
+
+Then run your project:
+
+```
+rel dev
+```
+
+This will run a GraphQL server with the following schema:
+
+```
+type Query {
+  FindBook(where: BookWhere): Book
+  ListBooks(where: BookWhere): [Book]!
+  
+  Hello: String
 }
 
-Server.start({
-  schema,
-})
-
-const PORT = process.env.PORT || 4000
-console.log(`Rel server running on localhost:${PORT}`)
+type Mutation {
+  CreateBook(input: BookInput!): Book
+  UpdateBook(id: UUID!, input: BookInput!): Book
+  DeleteBook(id: UUID!): Book
+}
 ```
-
-## Why not use a Headless CMS?
-
-There are some great options out there but most fall down when it comes to relational data. 
-
-No, not relational as in a SQL-based relational DB. Relational as in having complex relationships between data.
-
-Modern applications need a robust relational layer between objects and the users acting in the system. Otherwise, content is really just static.
-
-## Under the hood
-
-Rel DB is designed to act as a service in front of [redis-graph](https://oss.redislabs.com/redisgraph/). 
-
-Through a plugin ecosystem Rel will handle all of the following for you:
-
- - Authentication via Auth0
- - Images via ImgIX
- - Video via Mux
- 
