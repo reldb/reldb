@@ -25,6 +25,8 @@ Once finished, you will have the following project structure:
 ```
 ./myapp
 │
+├── api
+│   └── ... hello.ts, otherEndpoint.ts, etc
 ├── models
 │   └── ... Book.ts, Movie.ts, etc
 ├── server.ts
