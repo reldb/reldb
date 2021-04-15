@@ -1,8 +1,14 @@
 # rel - The Backend Framework You'll Enjoy Using
 
-There has been quite the renaissance in the Javascript world over the past 10 years. New frontend tooling is pushing the boundaries of both native and web applications.
+Building backends for production applications is always a cumbersome and repetetive task. Adding Authentication, DB persistence, search, file storages, images, etc is always the same. So why can't we generate this automagically?
 
-Our goal is to apply some of the foundations that have made frontend tooling successful to the backend. We want to have you up and running in minutes
+For the last several years I've been using Graph databases as my primary DB persistence. Cypher is a magical query language and offers so much more than SQL does.
+
+Combining these two concepts is Rel: Cypher based persistence + Generative GraphQL API.
+
+Only recently with the introduction of redis-graph does this become feasible. Neo4j was a great early-stage entrant but the costs associated with hosting (multiple) databases is cost-prohibitive for early stage projects. Now, we can have a persistence layer for around $5/month.
+
+Our goal is to apply the same feel of a React/Vue/Next.js project to the backend. We want to have you up and running in minutes without the repetetion.
 
 # Documentation
 
